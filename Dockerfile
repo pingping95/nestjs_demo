@@ -1,6 +1,5 @@
 FROM node:17-alpine AS build
 
-
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
@@ -15,7 +14,7 @@ ENV NODE_ENV=prod
 
 COPY --from=build /app/dist /app/dist
 COPY --from=build /app/node_modules /app/node_modules
-COPY --from=build /app/*.env /app
+COPY --from=build /app/*.env /app/
 
 EXPOSE 3000
 ENTRYPOINT [ "node" ]
